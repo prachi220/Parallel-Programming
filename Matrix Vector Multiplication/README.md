@@ -1,0 +1,1 @@
+This project involves implementation of an algorithm to perform matrix-vector multiplication, matrix being sparse and square. MPI, OpenMP and CUDA have been used to handle the problem. Details of problem statement mentioned in Lab4.pdf. Details of implementation mentioned in Report.odt.
