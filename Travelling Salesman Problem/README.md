@@ -1,1 +1,1 @@
-This assignment involves implementation of a parallel (OpenMP) solution to the NP-Hard problem of traveling salesman (TSP) using genetic algorithms (GA). Details of problem statement mentioned in lab2.pdf. Details of implementation mentioned in report.txt.
+This project involves implementation of a parallel (OpenMP) solution to the NP-Hard problem of traveling salesman (TSP) using genetic algorithms (GA). Details of problem statement mentioned in lab2.pdf. Details of implementation mentioned in report.txt.
