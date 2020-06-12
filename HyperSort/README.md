@@ -1,1 +1,1 @@
-This project involves implementation of a parallel version of the well know Quicksort algorithm using MPI.
+This project involves implementation of a parallel version of the well know Quicksort algorithm using MPI. Details of problem statement mentioned in LAB3.pdf. Details of implementation mentioned in report.pdf.
