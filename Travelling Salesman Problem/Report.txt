@@ -1,0 +1,29 @@
+﻿LAB-2
+
+1.  PARALLEL ALGORITHM:
+The input is stored in a struct city. Each city has an integer id and double x and y coordinates.
+The permutations of all the cities are stored in another struct called chromosome. Each chromosome stores the permutations of cities in a vector called gene, and the cycle-distance of these city in a double distance. A vector of all these chromosomes is called population.
+In each generation, the function sort is used to sort the population according to decreasing values of fitness, using parallel odd-even transposition sort.
+Chromosomes (1,2) , (3,4) , (4,5)... are picked uo from the sorted population and then undergo PMX and GX crossover. This crossover is also done in parallel where each threads crosses over a fixed number of pairs of parents.
+Mutation is induced in each offspring with a probability of 0.1.
+The new generation undergoes selection and crossover all over again till finally the fitness values start to converge in the generations.
+
+2.  DESIGN DECISIONS:
+The maximum number of cities is taken to be 36, the number of parents taken initially is given by a random number generated between 500-10000.
+Each city has an integer id, and x and y coordinates in double.
+The termination check is given by the number of iterations after which the optimal fitness of the population seems to converge (approximately 1000 iterations).
+The crossing over stratergy is given by generating first offspring using PMX and second by GX. This crossover happens with a probability of 0.8, else the parents remain as they are.
+With a probablity of 0.1, each offspring undergoes mutation.
+For each generation, the population is sorted based on descending order of their fitness and consecutive pairs of parents are selected from that sorted list.
+
+3.  PARALLIZATION STRATERGY:
+The number of threads used in the entire function is taken from the commandline. If the input number of threads is greater than the population size, then the program runs using population size number of threads.
+The method sort is used to calculate the cycle-length of each chromosome and sort the population in descending order of fitness. This function calculates the cycle-length of each chromosome in parallel and then uses optimal parallel algorithm of odd-even transposition sort to the population.
+The crossover algorithm applied on each sets of parents are done in parallel using input number of threads.
+So, in each generation, the selection and crossover both are done in parallel. 
+
+4.  LOAD BALANCING STRATERGY:
+Sort function uses data parallelism to sort the population in ascending order of cycle-distances. The entire population is evenly divided among input number of threads and then odd-even transposition sort is applied.
+The crossover function divides the pairs of parents evenly among input number of threads and uses data parallelism to achieve load balance between the threads.
+
+For compiling, use g++ -std=c++11 -o parallel_tsp parallel_tsp.cpp -fopenmp.

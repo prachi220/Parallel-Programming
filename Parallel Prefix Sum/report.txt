@@ -1,0 +1,24 @@
+﻿ASSIGNMENT 1
+REPORT
+
+Data structure used- The input array is stored in an integer array of ARRAYSIZE number of elements, to which arr is a pointer. 
+
+Optimum number of  threads- On NVIDIA 8 Series GPUs the optimal number of threads = 128 (given ARRAYSIZE is a multiple of 128).
+
+Design decisions- 
+Array arr of size ARRAYSIZE is the number of elements whose prefix-sum needs to be computed.
+B is the total number of blocks arr is divided into. It is equal to the number of threads given from command line (B is assumed to be the number of processors).
+N = (ARRAYSIZE / B), we essentially divide arr in B equal parts of size N elements each.
+1. We run the B threads parallelly that compute the prefix-sum of N elements carried by each block.
+2. Then in each thread first we find the sum of N elements in the block and store it in an array of size N called sum.
+3. Then the prefix-sum of sum array is calculated sequentially and stord in an array incr of size N.
+4. Then we calculate the prefix-sum of each block using incr sequentially in each thread, and there are B threads running in processor.
+
+Parallelisation-
+1. In this design we assume that we have B processors, so we run B threads such that each processor runs 1 thread in which every computation is done sequentially.
+2. The time complexity of this algorithm is: O(ARRAYSIZE/B  + log(ARRAYSIZE)) because our entire work is essentially divided into ARRAYSIZE/B (=N) number of tasks in sequence.
+
+Load Balancing stratergy-
+We have 3 functions that are executed by threads at different points of time: sum_array, final_array. The first function finds the sum of N elements and stores it in the sum array, and the second function user incr to find the prefix-sum of the entire array by computing on N elements, since this function is called by B threads running parallely.
+Each block runs together in parallel manner, and compute on equal number of elements i.e. N. This is a type of data-parallelism, and the data being equally complex for computation for each thread. Thus the workload is equally divided among all the threads.
+
